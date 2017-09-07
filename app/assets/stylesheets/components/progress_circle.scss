@@ -1,7 +1,8 @@
-$back-color: #dddddd;
+$back-color: #D8D8D8;
+$progress-color: $primary;
 
 .progress-circle {
-  background-color: $pale-grey;
+  background-color: $back-color;
   height: 110px;
   position: relative;
   width: 110px;
@@ -9,6 +10,16 @@ $back-color: #dddddd;
   @include media-breakpoint-down(md) {
     height: 90px;
     width: 90px;
+  }
+
+  &:hover {
+    .progress-circle__image-wrapper {
+      display: block;
+    }
+
+    .progress-circle__inner {
+      display: none;
+    }
   }
 
   &__inner {
@@ -25,20 +36,24 @@ $back-color: #dddddd;
     right: 0.5rem;
     top:  0.5rem;
     bottom: 0.5rem;
-    transition: transform .2s ease;
+  }
 
-    &:hover {
-      .progress-circle__image {
-        display: inline-block;
-      }
-    }
+  &__image-wrapper {
+    position: absolute;
+    display: none;
   }
 
   &__image {
     background-color: #fff;
     border-radius: 50%;
-    position: absolute;
-    display: none;
+    padding: 10px;
+    width: 110px;
+    height: 110px;
+
+    @include media-breakpoint-down(md) {
+      height: 90px;
+      width: 90px;
+    }
   }
 
   &__content {
@@ -48,10 +63,10 @@ $back-color: #dddddd;
   }
 
   &:after {
-    background-color: $primary;
+    background-color: $progress-color;
     border-radius: 50%;
     content: '';
-    display: inline-block;
+    display: block;
     height: 100%;
     width: 100%;
   }
@@ -66,7 +81,7 @@ $half: round($loops / 2);
   .progress-circle[data-progress=#{'"'+$i * $step+'"'}]:after {
     @if $i < $half {
       $next-deg: 90deg + $increment * $i;
-      background-image: linear-gradient(90deg, $back-color 50%, transparent 50%, transparent), linear-gradient($next-deg, $primary 50%, $back-color 50%, $back-color);
+      background-image: linear-gradient(90deg, $back-color 50%, transparent 50%, transparent), linear-gradient($next-deg, $progress-color 50%, $back-color 50%, $back-color);
     } @else {
       $next-deg: -90deg + $increment * ($i - $half);
       background-image: linear-gradient($next-deg, $primary 50%, transparent 50%, transparent), linear-gradient(270deg, $primary 50%, $back-color 50%, $back-color);

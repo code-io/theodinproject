@@ -106,10 +106,6 @@
         }
 
         @include media-breakpoint-down(sm) {
-          .course-badge {
-            width: 80px;
-          }
-
           .course-progress-wrapper {
             text-align: right;
 
